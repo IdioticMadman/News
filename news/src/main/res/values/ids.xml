@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="dl_main" type="id">dl_main</item>
+    <item name="fl_content" type="id">fl_content</item>
+    <item name="rl_root" type="id">rl_root</item>
+    <item name="iv_horse" type="id">iv_horse</item>
+    <item name="rb_function" type="id">rb_function</item>
+    <item name="rb_news_center" type="id">rb_news_center</item>
+    <item name="rb_smart_service" type="id">rb_smart_service</item>
+    <item name="rb_gov_affairs" type="id">rb_gov_affairs</item>
+    <item name="rb_setting" type="id">rb_setting</item>
+    <item name="ll_left_menu" type="id">ll_left_menu</item>
+    <item name="tb_main" type="id">tb_main</item>
+    <item name="rg_home" type="id">rg_home</item>
+    <item name="vp_guide" type="id">vp_guide</item>
+    <item name="btn_start" type="id">btn_start</item>
+    <item name="ll_point_group" type="id">ll_point_group</item>
+    <item name="red_point" type="id">red_point</item>
+    <item name="vp_home" type="id">vp_home</item>
+    <item name="fl_menu" type="id">fl_menu</item>
+    <item name="lv_news_center" type="id">lv_news_center</item>
+    <item name="lv_smart_service" type="id">lv_smart_service</item>
+    <item name="lv_gov_affairs" type="id">lv_gov_affairs</item>
+    <item name="iv_left_menu" type="id">iv_left_menu</item>
+    <item name="tv_left_menu" type="id">tv_left_menu</item>
+</resources>

@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#262626"
+    android:orientation="vertical"
+    tools:context="com.robert.news.fragment.MenuFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@id/lv_news_center"
+            layout="@layout/list_view" />
+
+        <include
+            android:id="@id/lv_smart_service"
+            layout="@layout/list_view" />
+
+        <include
+            android:id="@id/lv_gov_affairs"
+            layout="@layout/list_view" />
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.HomeFragment">
+
+    <com.robert.news.view.CustomViewPager
+        android:id="@id/vp_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </com.robert.news.view.CustomViewPager>
+
+    <RadioGroup
+        android:id="@id/rg_home"
+        android:layout_weight="0"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@mipmap/bottom_tab_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="2dp">
+
+        <RadioButton
+            android:id="@id/rb_function"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/icon_function"
+            android:text="@string/tab_function" />
+
+        <RadioButton
+            android:id="@id/rb_news_center"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/icon_news_center"
+            android:text="@string/tab_news_center" />
+
+        <RadioButton
+            android:id="@id/rb_smart_service"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/icon_smart_service"
+            android:text="@string/tab_smart_service" />
+
+        <RadioButton
+            android:id="@id/rb_gov_affairs"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/icon_gov_affairs"
+            android:text="@string/tab_gov_affairs" />
+
+        <RadioButton
+            android:id="@id/rb_setting"
+            style="@style/main_tab_bottom"
+            android:drawableTop="@drawable/icon_setting"
+            android:text="@string/tab_setting" />
+
+    </RadioGroup>
+</LinearLayout>
