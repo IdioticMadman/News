@@ -66,7 +66,7 @@ public class HomeFragment extends BaseFragment implements LazyViewPager.OnPageCh
                         case R.id.rb_news_center:
                             mHomeViewPager.setCurrentItem(NEWS_CENTER, false);
                             slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-                            System.out.println("设置菜单类型");
+                            //System.out.println("设置菜单类型");
                             menuFragment.setMenuType(NEWS_CENTER);
                             break;
                         case R.id.rb_smart_service:

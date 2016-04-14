@@ -23,4 +23,9 @@
     <item name="lv_gov_affairs" type="id">lv_gov_affairs</item>
     <item name="iv_left_menu" type="id">iv_left_menu</item>
     <item name="tv_left_menu" type="id">tv_left_menu</item>
+    <item name="fl_news_center" type="id">fl_news_center</item>
+    <item name="btn_left" type="id">btn_left</item>
+    <item name="imgbtn_left" type="id">imgbtn_left</item>
+    <item name="txt_title" type="id">txt_title</item>
+    <item name="btn_right" type="id">btn_right</item>
 </resources>

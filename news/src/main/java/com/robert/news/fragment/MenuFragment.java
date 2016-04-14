@@ -12,7 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.robert.news.R;
+import com.robert.news.activity.MainActivity;
 import com.robert.news.adapter.MenuBaseAdapter;
+import com.robert.news.home.NewsCenterPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,7 @@ public class MenuFragment extends BaseFragment {
     private HomeFragment homeFragment;
     private MenuAdapter menuAdapter;
     private MenuAdapter serviceAdapter;
-    private MenuAdapter govaffairsAdapter;
+    private MenuAdapter govAffairsAdapter;
 
     @Override
     public View initView(LayoutInflater inflater, ViewGroup container) {
@@ -46,7 +48,7 @@ public class MenuFragment extends BaseFragment {
         lv_gov_affairs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                govaffairsAdapter.clickItem(position);
+                govAffairsAdapter.clickItem(position);
                 slidingMenu.toggle();
             }
         });
@@ -54,6 +56,7 @@ public class MenuFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 menuAdapter.clickItem(position);
+                ((NewsCenterPage)((MainActivity) mContext).getHomeFragment().getBasePage(HomeFragment.NEWS_CENTER)).switchFragment(position);
                 slidingMenu.toggle();
             }
         });
@@ -118,11 +121,11 @@ public class MenuFragment extends BaseFragment {
                 lv_gov_affairs.setVisibility(View.VISIBLE);
                 lv_news_center.setVisibility(View.INVISIBLE);
                 lv_news_center.setVisibility(View.INVISIBLE);
-                if (govaffairsAdapter == null) {
-                    govaffairsAdapter = new MenuAdapter(mMenuLists);
-                    lv_gov_affairs.setAdapter(govaffairsAdapter);
+                if (govAffairsAdapter == null) {
+                    govAffairsAdapter = new MenuAdapter(mMenuLists);
+                    lv_gov_affairs.setAdapter(govAffairsAdapter);
                 } else {
-                    govaffairsAdapter.notifyDataSetChanged();
+                    govAffairsAdapter.notifyDataSetChanged();
                 }
                 break;
         }
