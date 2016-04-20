@@ -17,7 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.robert.news.R;
 import com.robert.news.utils.DensityUtils;
-import com.robert.news.utils.SharedPrefenceUtils;
+import com.robert.news.utils.SPrefUtils;
 import com.robert.news.view.DepthPageViewPager;
 
 import java.util.ArrayList;
@@ -141,7 +141,7 @@ public class GuideActivity extends Activity {
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPrefenceUtils.putBoolean(GuideActivity.this, "is_first_open", true);
+                SPrefUtils.putBoolean(GuideActivity.this, "is_first_open", true);
                 startActivity(new Intent(GuideActivity.this,MainActivity.class));
                 finish();
             }

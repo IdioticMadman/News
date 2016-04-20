@@ -23,12 +23,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
-public class HomeFragment extends BaseFragment implements LazyViewPager.OnPageChangeListener{
+public class HomeFragment extends BaseFragment implements LazyViewPager.OnPageChangeListener {
 
+    public static final int FUNCTION = 0;
     public static final int NEWS_CENTER = 1;
     public static final int SMART_SERVICE = 2;
     public static final int GOV_AFFAIRS = 3;
-    public static final int FUNCTION = 0;
     public static final int SETTING = 4;
     @Bind(R.id.vp_home)
     CustomViewPager mHomeViewPager;
@@ -67,16 +67,25 @@ public class HomeFragment extends BaseFragment implements LazyViewPager.OnPageCh
                             mHomeViewPager.setCurrentItem(NEWS_CENTER, false);
                             slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
                             //System.out.println("设置菜单类型");
+                            if (null != views && views.size() > 0) {
+                                views.get(NEWS_CENTER).onResume();
+                            }
                             menuFragment.setMenuType(NEWS_CENTER);
                             break;
                         case R.id.rb_smart_service:
                             mHomeViewPager.setCurrentItem(SMART_SERVICE, false);
                             slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+                            if (null != views && views.size() > 0) {
+                                views.get(SMART_SERVICE).onResume();
+                            }
                             menuFragment.setMenuType(SMART_SERVICE);
                             break;
                         case R.id.rb_gov_affairs:
                             mHomeViewPager.setCurrentItem(GOV_AFFAIRS, false);
                             slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+                            if (null != views && views.size() > 0) {
+                                views.get(GOV_AFFAIRS).onResume();
+                            }
                             menuFragment.setMenuType(GOV_AFFAIRS);
                             break;
                         case R.id.rb_setting:
@@ -109,9 +118,9 @@ public class HomeFragment extends BaseFragment implements LazyViewPager.OnPageCh
     @Override
     public void onPageSelected(int position) {
         BasePage basePage = views.get(position);
-       // if (!basePage.isLoaded){
+        if (!basePage.isLoaded) {
             basePage.initData();
-      //  }
+        }
 
     }
 

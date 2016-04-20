@@ -11,7 +11,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.RelativeLayout;
 
 import com.robert.news.R;
-import com.robert.news.utils.SharedPrefenceUtils;
+import com.robert.news.utils.SPrefUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -82,7 +82,7 @@ public class SplashActivity extends Activity {
             @Override
             public void onAnimationEnd(Animation animation) {
 
-                if (SharedPrefenceUtils.getBoolean(SplashActivity.this, "is_first_open", false)) {
+                if (SPrefUtils.getBoolean(SplashActivity.this, "is_first_open", false)) {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                     finish();
                 } else {

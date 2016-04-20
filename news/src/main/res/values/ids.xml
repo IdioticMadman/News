@@ -28,4 +28,6 @@
     <item name="imgbtn_left" type="id">imgbtn_left</item>
     <item name="txt_title" type="id">txt_title</item>
     <item name="btn_right" type="id">btn_right</item>
+    <item name="indicator" type="id">indicator</item>
+    <item name="vp_news_center" type="id">vp_news_center</item>
 </resources>

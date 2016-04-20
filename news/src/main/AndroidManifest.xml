@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.robert.news">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".NewsApp"
@@ -27,7 +27,9 @@
         <!-- 引导页Activity -->
         <activity android:name=".activity.GuideActivity" />
         <!--主界面-->
-        <activity android:name=".activity.MainActivity"/>
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/Theme.PageIndicatorDefaults" />
     </application>
 
 </manifest>

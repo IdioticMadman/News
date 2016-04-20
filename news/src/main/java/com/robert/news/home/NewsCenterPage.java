@@ -14,12 +14,12 @@ import com.robert.news.R;
 import com.robert.news.activity.MainActivity;
 import com.robert.news.bean.NewsCenter;
 import com.robert.news.fragment.HomeFragment;
-import com.robert.news.menu.news.NewsItemPage;
 import com.robert.news.menu.news.NewsPage;
 import com.robert.news.menu.news.PicturePage;
+import com.robert.news.menu.news.SubjectPage;
 import com.robert.news.menu.news.TopicPage;
 import com.robert.news.utils.HMAPI;
-import com.robert.news.utils.SharedPrefenceUtils;
+import com.robert.news.utils.SPrefUtils;
 
 import org.json.JSONObject;
 
@@ -55,23 +55,31 @@ import butterknife.ButterKnife;
 public class NewsCenterPage extends BasePage {
 
     public final static int NEWS = 0;
-    public final static int NEWS_ITEM = 1;
+    public final static int SUBJECT = 1;
     public final static int PICTURE = 2;
     public final static int TOPIC = 3;
 
     @Bind(R.id.fl_news_center)
     FrameLayout mFlNewsCenter;
-
+    //新闻中心侧滑菜单数据
     private List<String> mListNews = new ArrayList<>();
+    //新闻中心侧滑菜单，对应子项目的view集合
     private List<BasePage> mNewsPages = new ArrayList<>();
+    private int index;
 
     public NewsCenterPage(Context context) {
         super(context);
     }
 
+    public void onResume() {
+        if (null != mNewsPages && mNewsPages.size() > 0) {
+            mNewsPages.get(index).onResume();
+        }
+    }
+
     @Override
     public View initView() {
-        View view = View.inflate(mContext, R.layout.news_center_frame, null);
+        View view = View.inflate(mContext, R.layout.frame_news_center, null);
         ButterKnife.bind(this, view);
         initTitles(view);
         return view;
@@ -81,19 +89,11 @@ public class NewsCenterPage extends BasePage {
     public void initData() {
         System.out.println("进入新闻中心");
 
-        String tempString = SharedPrefenceUtils.getString(mContext, HMAPI.NEW_CENTER, "");
+        String tempString = SPrefUtils.getString(mContext, HMAPI.NEW_CENTER, "");
         if (!TextUtils.isEmpty(tempString)) {
             processData(tempString);
         }
         getData();
-        if (mNewsPages != null) {
-            mNewsPages.clear();
-        }
-        mNewsPages.add(new NewsPage(mContext));
-        mNewsPages.add(new NewsItemPage(mContext));
-        mNewsPages.add(new PicturePage(mContext));
-        mNewsPages.add(new TopicPage(mContext));
-        switchFragment(NEWS);
     }
 
     private void getData() {
@@ -101,7 +101,7 @@ public class NewsCenterPage extends BasePage {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, HMAPI.NEW_CENTER, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                SharedPrefenceUtils.putString(mContext, HMAPI.NEW_CENTER, response.toString());
+                SPrefUtils.putString(mContext, HMAPI.NEW_CENTER, response.toString());
                 processData(response.toString());
             }
         }, new Response.ErrorListener() {
@@ -117,15 +117,23 @@ public class NewsCenterPage extends BasePage {
 
     private void processData(String jsonObject) {
         Gson gson = new Gson();
-        //isLoaded = true;
         if (mListNews != null) {
             mListNews.clear();
         }
+        isLoaded = true;
         NewsCenter newsCenter = gson.fromJson(jsonObject, NewsCenter.class);
         for (NewsCenter.DataBean data : newsCenter.getData()) {
             mListNews.add(data.getTitle());
-            System.out.println("*********" + data.getTitle());
+            //System.out.println("*********" + data.getTitle());
         }
+        if (mNewsPages != null) {
+            mNewsPages.clear();
+        }
+        mNewsPages.add(new NewsPage(mContext, newsCenter.getData().get(NEWS).getChildren()));
+        mNewsPages.add(new SubjectPage(mContext));
+        mNewsPages.add(new PicturePage(mContext));
+        mNewsPages.add(new TopicPage(mContext));
+        switchFragment(NEWS);
         ((MainActivity) mContext).getMenuFragment().initMenu(HomeFragment.NEWS_CENTER, mListNews);
     }
 
@@ -135,7 +143,7 @@ public class NewsCenterPage extends BasePage {
             case NEWS:
                 mTvTitle.setText("新闻");
                 break;
-            case NEWS_ITEM:
+            case SUBJECT:
                 mTvTitle.setText("专题");
                 break;
             case PICTURE:
@@ -147,7 +155,7 @@ public class NewsCenterPage extends BasePage {
         }
         mFlNewsCenter.removeAllViews();
         mFlNewsCenter.addView(basePage.getRootView());
-
+        basePage.initData();
+        index = position;
     }
-
 }

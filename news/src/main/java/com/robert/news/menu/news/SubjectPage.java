@@ -9,9 +9,9 @@ import com.robert.news.home.BasePage;
 /**
  * Created by robert on 2016/4/14.
  */
-public class NewsItemPage extends BasePage{
+public class SubjectPage extends BasePage{
 
-    public NewsItemPage(Context context) {
+    public SubjectPage(Context context) {
         super(context);
     }
 

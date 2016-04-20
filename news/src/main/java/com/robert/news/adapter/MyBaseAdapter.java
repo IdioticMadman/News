@@ -1,5 +1,6 @@
 package com.robert.news.adapter;
 
+import android.content.Context;
 import android.widget.BaseAdapter;
 
 import java.util.List;
@@ -27,13 +28,20 @@ import java.util.List;
  * ━━━━━━感觉萌萌哒━━━━━━
  * Created by robert on 2016/4/13.
  */
-public abstract class MenuBaseAdapter<T> extends BaseAdapter {
+public abstract class MyBaseAdapter<T> extends BaseAdapter {
 
     public List<T> mDatas;
+    public Context mContext;
 
-    public MenuBaseAdapter(List<T> lists){
+    public MyBaseAdapter(List<T> lists){
         this.mDatas = lists;
     }
+
+    public MyBaseAdapter(List<T> lists, Context context){
+        this.mDatas = lists;
+        this.mContext = context;
+    }
+
 
     @Override
     public int getCount() {

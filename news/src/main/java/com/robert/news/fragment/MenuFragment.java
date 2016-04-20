@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.robert.news.R;
 import com.robert.news.activity.MainActivity;
-import com.robert.news.adapter.MenuBaseAdapter;
+import com.robert.news.adapter.MyBaseAdapter;
 import com.robert.news.home.NewsCenterPage;
 
 import java.util.ArrayList;
@@ -30,7 +30,6 @@ public class MenuFragment extends BaseFragment {
     ListView lv_smart_service;
     @Bind(R.id.lv_gov_affairs)
     ListView lv_gov_affairs;
-    private HomeFragment homeFragment;
     private MenuAdapter menuAdapter;
     private MenuAdapter serviceAdapter;
     private MenuAdapter govAffairsAdapter;
@@ -44,7 +43,6 @@ public class MenuFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        homeFragment = (HomeFragment) getActivity().getSupportFragmentManager().findFragmentByTag("home");
         lv_gov_affairs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -56,7 +54,7 @@ public class MenuFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 menuAdapter.clickItem(position);
-                ((NewsCenterPage)((MainActivity) mContext).getHomeFragment().getBasePage(HomeFragment.NEWS_CENTER)).switchFragment(position);
+                ((NewsCenterPage) ((MainActivity) mContext).getHomeFragment().getBasePage(HomeFragment.NEWS_CENTER)).switchFragment(position);
                 slidingMenu.toggle();
             }
         });
@@ -71,6 +69,11 @@ public class MenuFragment extends BaseFragment {
 
     List<String> mMenuLists = new ArrayList<>();
 
+    /**
+     * 根据ViewPager的position设置menu的值
+     * @param position ViewPager中该view的位置
+     * @param titles ViewPager对应该view的侧滑菜单的值
+     */
     public void initMenu(int position, List<String> titles) {
         assert mMenuLists != null;
         mMenuLists.clear();
@@ -90,6 +93,10 @@ public class MenuFragment extends BaseFragment {
         }
     }
 
+    /**
+     * 设置不同的ViewPager展现不同的侧滑菜单
+     * @param menuType 菜单类型
+     */
     public void setMenuType(int menuType) {
         lv_gov_affairs.setVisibility(View.INVISIBLE);
         lv_news_center.setVisibility(View.INVISIBLE);
@@ -100,7 +107,7 @@ public class MenuFragment extends BaseFragment {
                 lv_gov_affairs.setVisibility(View.INVISIBLE);
                 lv_smart_service.setVisibility(View.INVISIBLE);
                 if (menuAdapter == null) {
-                    menuAdapter = new MenuAdapter(mMenuLists);
+                    menuAdapter = new MenuAdapter(mMenuLists,mContext);
                     lv_news_center.setAdapter(menuAdapter);
                 } else {
                     menuAdapter.notifyDataSetChanged();
@@ -111,7 +118,7 @@ public class MenuFragment extends BaseFragment {
                 lv_news_center.setVisibility(View.INVISIBLE);
                 lv_news_center.setVisibility(View.INVISIBLE);
                 if (serviceAdapter == null) {
-                    serviceAdapter = new MenuAdapter(mMenuLists);
+                    serviceAdapter = new MenuAdapter(mMenuLists,mContext);
                     lv_smart_service.setAdapter(serviceAdapter);
                 } else {
                     serviceAdapter.notifyDataSetChanged();
@@ -122,7 +129,7 @@ public class MenuFragment extends BaseFragment {
                 lv_news_center.setVisibility(View.INVISIBLE);
                 lv_news_center.setVisibility(View.INVISIBLE);
                 if (govAffairsAdapter == null) {
-                    govAffairsAdapter = new MenuAdapter(mMenuLists);
+                    govAffairsAdapter = new MenuAdapter(mMenuLists,mContext);
                     lv_gov_affairs.setAdapter(govAffairsAdapter);
                 } else {
                     govAffairsAdapter.notifyDataSetChanged();
@@ -132,14 +139,15 @@ public class MenuFragment extends BaseFragment {
 
     }
 
-    private class MenuAdapter extends MenuBaseAdapter<String> {
-        private Context context;
+    /**
+     * 侧滑菜单的ListView的BaseAdapter
+     */
+    private class MenuAdapter extends MyBaseAdapter<String> {
 
         private int mPosition;
 
-        public MenuAdapter(List<String> mDatas) {
-            super(mDatas);
-            this.context = mContext;
+        public MenuAdapter(List<String> mDatas,Context context) {
+            super(mDatas,context);
         }
 
         public void clickItem(int position) {
@@ -153,7 +161,7 @@ public class MenuFragment extends BaseFragment {
             ViewHolder viewHolder;
             if (convertView == null) {
                 viewHolder = new ViewHolder();
-                view = View.inflate(context, R.layout.menu_list_item, null);
+                view = View.inflate(mContext, R.layout.menu_list_item, null);
                 viewHolder.iv_left_menu = (ImageView) view.findViewById(R.id.iv_left_menu);
                 viewHolder.tv_left_menu = (TextView) view.findViewById(R.id.tv_left_menu);
                 view.setTag(viewHolder);

@@ -77,4 +77,6 @@ public abstract class BasePage implements View.OnClickListener{
     public void onClick(View v) {
         slidingMenu.toggle();
     }
+
+    public void onResume(){}
 }

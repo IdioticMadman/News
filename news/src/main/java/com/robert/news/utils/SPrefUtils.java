@@ -26,7 +26,7 @@ import android.content.SharedPreferences;
  * ━━━━━━感觉萌萌哒━━━━━━
  * Created by robert on 2016/3/14.
  */
-public class SharedPrefenceUtils {
+public class SPrefUtils {
 
     /**
      * sp的名字

@@ -1,1 +1,1 @@
-include ':news'
+include ':news', ':viewpagerindicator'
